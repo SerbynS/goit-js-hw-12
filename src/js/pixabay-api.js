@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function fetchImages(searchText) {
   const API_KEY = '22291580-fa60bbd7949edc60de7cbcd1e';
-  const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchText}&image_type=photo&per_page=119`;
+  const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchText}&image_type=photo&per_page=9`;
 
   return axios
     .get(url)
