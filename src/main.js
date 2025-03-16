@@ -15,25 +15,25 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   const search = event.target['search-text'].value;
 
-  clearGallery(gallery);
+  // clearGallery(gallery);
 
-  fetchImages(search)
-    .then(Images => {
-      toggleLoader(true);
-      if (Images.length != 0) {
-        // console.log(Images);
-        const galleryMarkup = renderGalleryMarkup(Images);
-        updateGallery(gallery, galleryMarkup);
-        renderSimpleLightbox(galleryMarkup);
-      } else {
-        renderError();
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    })
-    .finally(() => {
-      toggleLoader(false);
-      form.reset();
-    });
+  // fetchImages(search)
+  //   .then(Images => {
+  //     toggleLoader(true);
+  //     if (Images.length != 0) {
+  //       // console.log(Images);
+  //       const galleryMarkup = renderGalleryMarkup(Images);
+  //       updateGallery(gallery, galleryMarkup);
+  //       renderSimpleLightbox(galleryMarkup);
+  //     } else {
+  //       renderError();
+  //     }
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   })
+  //   .finally(() => {
+  //     toggleLoader(false);
+  //     form.reset();
+  //   });
 });
