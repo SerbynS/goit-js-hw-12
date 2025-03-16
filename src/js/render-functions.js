@@ -6,11 +6,19 @@ import 'izitoast/dist/css/iziToast.min.css';
 export function renderGalleryMarkup(images) {
   const galleryMarkup = images
     .map(
-      ({ webformatURL, largeImageURL, likes, views, comments, downloads }) =>
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) =>
         `
       <li class="gallery-item">
         <a class="gallery-link" href="${largeImageURL}">
-          <img class="gallery-image" src="${webformatURL}" alt="photo" />
+          <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
         </a>
         <ul class="info-cards">
           <li class="info-card"><h3>Likes</h3><p>${likes}</p></li>
@@ -59,9 +67,7 @@ export function toggleLoader(loading) {
   const loader = document.querySelector('.loader');
   if (loading) {
     loader.classList.remove('hidden');
-    console.log('del');
   } else {
     loader.classList.add('hidden');
-    console.log('add');
   }
 }

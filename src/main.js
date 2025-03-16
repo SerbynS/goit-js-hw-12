@@ -16,10 +16,9 @@ form.addEventListener('submit', event => {
   const search = event.target['search-text'].value;
 
   clearGallery(gallery);
-
+  toggleLoader(true);
   fetchImages(search)
     .then(Images => {
-      toggleLoader(true);
       if (Images.length != 0) {
         // console.log(Images);
         const galleryMarkup = renderGalleryMarkup(Images);
