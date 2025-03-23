@@ -4,7 +4,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 export function renderGalleryMarkup(images) {
-  const galleryMarkup = images
+  return images
     .map(
       ({
         webformatURL,
@@ -14,24 +14,20 @@ export function renderGalleryMarkup(images) {
         views,
         comments,
         downloads,
-      }) =>
-        `
-      <li class="gallery-item">
-        <a class="gallery-link" href="${largeImageURL}">
-          <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
-        </a>
-        <ul class="info-cards">
-          <li class="info-card"><h3>Likes</h3><p>${likes}</p></li>
-          <li class="info-card"><h3>Views</h3><p>${views}</p></li>
-          <li class="info-card"><h3>Comments</h3><p>${comments}</p></li>
-          <li class="info-card"><h3>Downloads</h3><p>${downloads}</p></li>
-        </ul>
-      </li>
-    `
+      }) => `
+    <li class="gallery-item">
+      <a class="gallery-link" href="${largeImageURL}">
+        <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
+      </a>
+      <ul class="info-cards">
+        <li class="info-card"><h3>Likes</h3><p>${likes}</p></li>
+        <li class="info-card"><h3>Views</h3><p>${views}</p></li>
+        <li class="info-card"><h3>Comments</h3><p>${comments}</p></li>
+        <li class="info-card"><h3>Downloads</h3><p>${downloads}</p></li>
+      </ul>
+    </li>`
     )
     .join('');
-
-  return galleryMarkup;
 }
 
 export function updateGallery(gallery, markup) {
@@ -42,14 +38,13 @@ export function clearGallery(gallery) {
   gallery.innerHTML = '';
 }
 
-export function renderSimpleLightbox(markup) {
-  let gallerys = new SimpleLightbox('a');
-  gallerys.on('show.simplelightbox');
-
-  gallerys.refresh();
+export function renderSimpleLightbox() {
+  const galleryInstance = new SimpleLightbox('.gallery a');
+  galleryInstance.on('show.simplelightbox');
+  galleryInstance.refresh();
 }
 
-export function renderError() {
+export function renderError(message) {
   iziToast.error({
     backgroundColor: '#EF4040',
     messageColor: '#FAFAFB',
@@ -57,17 +52,19 @@ export function renderError() {
     progressBarColor: '#B51B1B',
     maxWidth: '432',
     messageSize: '16',
-    //   icon: '',
     position: 'topRight',
-    message: `Sorry, there are no images matching your search query. Please, try again!`,
+    message,
   });
 }
 
-export function toggleLoader(loading) {
-  const loader = document.querySelector('.loader');
-  if (loading) {
-    loader.classList.remove('hidden');
-  } else {
-    loader.classList.add('hidden');
+export function toggleLoader(element) {
+  element.classList.toggle('hidden');
+}
+
+export function smoothScroll() {
+  const galleryItem = document.querySelector('.gallery-item');
+  if (galleryItem) {
+    const itemHeight = galleryItem.getBoundingClientRect().height;
+    window.scrollBy({ top: itemHeight * 2, behavior: 'smooth' });
   }
 }
