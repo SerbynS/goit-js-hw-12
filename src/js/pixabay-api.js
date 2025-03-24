@@ -17,7 +17,7 @@ export async function fetchImages(searchText, page = 1) {
       },
     })
     .then(response => {
-      return response.data.hits;
+      return response.data;
     })
     .catch(error => {
       throw new Error(error);

@@ -38,10 +38,14 @@ export function clearGallery(gallery) {
   gallery.innerHTML = '';
 }
 
+let galleryInstance = null;
+
 export function renderSimpleLightbox() {
-  const galleryInstance = new SimpleLightbox('.gallery a');
-  galleryInstance.on('show.simplelightbox');
-  galleryInstance.refresh();
+  if (!galleryInstance) {
+    galleryInstance = new SimpleLightbox('.gallery a');
+  } else {
+    galleryInstance.refresh();
+  }
 }
 
 export function renderError(message) {
